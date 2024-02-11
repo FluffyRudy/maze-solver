@@ -1,7 +1,7 @@
 import pygame
 from random import randint
 import sys
-from maze import maze, solution, start_position, end_position
+from maze import maze, solution
 
 class Colors:
     WHITE = pygame.Color(255, 255, 255, 255)
@@ -19,7 +19,7 @@ class Settings(Colors):
     SCREEN_WIDTH = 990
     SCREEN_HEIGHT = 990
     SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
-    GRID_SIZE = int(SCREEN_WIDTH / len(maze))
+    GRID_SIZE = 33
     MAX_ROWS = int(SCREEN_HEIGHT / GRID_SIZE)
     MAX_COLS = int(SCREEN_WIDTH / GRID_SIZE)
     FPS = 60
@@ -44,7 +44,7 @@ class BFSVisualizer(Settings):
                     self.screen, 
                     self.grid[row][col], 
                     (col * Settings.GRID_SIZE, row * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE),
-                    0, 10
+                    3, 10
                 )
     
     def generate_maze(self):
@@ -85,23 +85,16 @@ class BFSVisualizer(Settings):
             self.grid = next(self.grid_iterator)
         except:
             self.grid_iterator = None
-            if solution == None:
-                return
-            for i in range(len(solution) - 1):
-                pygame.draw.line(
+            for path in solution:
+                pygame.draw.rect(
                     self.screen,
                     "blue",
-                    (
-                        solution[i][1] * Settings.GRID_SIZE + Settings.GRID_SIZE // 2, 
-                        solution[i][0] * Settings.GRID_SIZE+ Settings.GRID_SIZE // 2
-                    ),
-                    (
-                        solution[i+1][1] * Settings.GRID_SIZE + Settings.GRID_SIZE // 2, 
-                        solution[i+1][0] * Settings.GRID_SIZE + Settings.GRID_SIZE // 2),
-                    10
+                    (path[1] * Settings.GRID_SIZE, path[0] * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE),
+                    0, 10
                 )
-            pygame.draw.rect(self.screen, Settings.RED, (*start_position, Settings.GRID_SIZE, Settings.GRID_SIZE), 0, 50)
-            pygame.draw.rect(self.screen, Settings.RED, (end_position[1] * Settings.GRID_SIZE, end_position[0] * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE), 0, 50)
+            pygame.draw.rect(self.screen, Settings.RED, (0, 0, Settings.GRID_SIZE, Settings.GRID_SIZE))
+            pygame.draw.rect(self.screen, Settings.RED, (29 * Settings.GRID_SIZE, 29 * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE))
+
     def run(self):
         while True:
             self.clock.tick(Settings.FPS)
