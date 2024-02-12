@@ -2,6 +2,8 @@
 
 This Python program visualizes the Breadth-First Search (BFS) algorithm solving a maze using the Pygame library.
 
+![Maze Solver](maze-solver.gif)
+
 ## Description
 
 The program uses a 2D grid to represent a maze, where 1s represent walls and 0s represent paths. The BFS algorithm is used to find a path from the top-left corner to the bottom-right corner of the maze.
