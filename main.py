@@ -23,7 +23,7 @@ class Settings(Colors):
     MAX_ROWS = int(SCREEN_HEIGHT / GRID_SIZE)
     MAX_COLS = int(SCREEN_WIDTH / GRID_SIZE)
     FPS = 60
-    INIT_POS = (0, 0)
+    INIT_POS = start_position
 
 class BFSVisualizer(Settings):
     def __init__(self):
@@ -32,7 +32,6 @@ class BFSVisualizer(Settings):
         self.screen = pygame.display.set_mode(Settings.SCREEN_SIZE)
         self.clock = pygame.time.Clock()
 
-        #ui
         self.grid = [[Settings.FOREGROUND for i in range(Settings.MAX_ROWS)] for j in range(Settings.MAX_COLS)]
         self.generate_maze()
         self.grid_iterator = self.BFS()
@@ -100,8 +99,10 @@ class BFSVisualizer(Settings):
                         solution[i+1][0] * Settings.GRID_SIZE + Settings.GRID_SIZE // 2),
                     10
                 )
-            pygame.draw.rect(self.screen, Settings.RED, (*start_position, Settings.GRID_SIZE, Settings.GRID_SIZE), 0, 50)
-            pygame.draw.rect(self.screen, Settings.RED, (end_position[1] * Settings.GRID_SIZE, end_position[0] * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE), 0, 50)
+            start_rect = (start_position[1] * Settings.GRID_SIZE, start_position[0] * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE)
+            end_rect = (end_position[1] * Settings.GRID_SIZE, end_position[0] * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE)
+            pygame.draw.rect(self.screen, Settings.RED, start_rect, 0, 50)
+            pygame.draw.rect(self.screen, Settings.RED, end_rect, 0, 50)
     def run(self):
         while True:
             self.clock.tick(Settings.FPS)
