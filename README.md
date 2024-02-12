@@ -34,5 +34,3 @@ python main.py
 ## Requirements
 - **python3.X**
 - **pygame**
-
-> :warning: **Ensure your array maze is squared (NxN)**
