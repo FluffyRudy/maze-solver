@@ -26,7 +26,7 @@ The program uses a 2D grid to represent a maze, where 1s represent walls and 0s 
 To run the program, simply execute the script with a Python interpreter:
 
 ```bash
-python bfs_visualizer.py
+python main.py
 ```
 
 ## Requirements
