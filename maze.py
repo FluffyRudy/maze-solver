@@ -1,7 +1,5 @@
 import random
 
-import random
-
 def create_maze(dim):
     maze = [[0 for _ in range(dim*2+1)] for _ in range(dim*2+1)]
     x, y = (0, 0)
