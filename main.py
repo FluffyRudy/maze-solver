@@ -7,9 +7,11 @@ class Colors:
     WHITE = pygame.Color(255, 255, 255, 255)
     BLACK = pygame.Color(0, 0, 0, 255)
     RED = pygame.Color(255, 0, 0)
-    LIME = pygame.Color(5, 255, 120)
-    BACKGROUND = BLACK
-    FOREGROUND = WHITE
+    GREEN = pygame.Color(0, 255, 0)
+    FADED_RED = pygame.Color(255, 100, 100)
+    GREY = pygame.Color(140, 135, 132)
+    BACKGROUND = WHITE
+    FOREGROUND = BLACK
 
     @staticmethod
     def random_color():
@@ -31,7 +33,6 @@ class BFSVisualizer(Settings):
         pygame.font.init()
         self.screen = pygame.display.set_mode(Settings.SCREEN_SIZE)
         self.clock = pygame.time.Clock()
-
         self.grid = [[Settings.FOREGROUND for i in range(Settings.MAX_ROWS)] for j in range(Settings.MAX_COLS)]
         self.generate_maze()
         self.grid_iterator = self.BFS()
@@ -43,7 +44,7 @@ class BFSVisualizer(Settings):
                     self.screen, 
                     self.grid[row][col], 
                     (col * Settings.GRID_SIZE, row * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE),
-                    0, 10
+                    0, 1
                 )
     
     def generate_maze(self):
@@ -52,7 +53,7 @@ class BFSVisualizer(Settings):
                 if maze[row][col] == 1:
                     self.grid[row][col] = self.FOREGROUND
                 else:
-                    self.grid[row][col] = self.RED
+                    self.grid[row][col] = self.FADED_RED
 
     def BFS(self):
         queue = [Settings.INIT_POS]
@@ -61,7 +62,10 @@ class BFSVisualizer(Settings):
             curr_x, curr_y = queue.pop(0)
             if self.grid[curr_x][curr_y] != Settings.FOREGROUND:
                 continue
-            self.grid[curr_x][curr_y] = Settings.LIME
+            self.grid[curr_x][curr_y] = Settings.GREY
+            if curr_x == end_position[0] and curr_y == end_position[1]:
+                self.grid_iterator = None
+                return
             if curr_x - 1 >= 0:
                 queue.append((curr_x - 1, curr_y))
             if curr_x + 1 < Settings.MAX_COLS:
@@ -99,10 +103,11 @@ class BFSVisualizer(Settings):
                         solution[i+1][0] * Settings.GRID_SIZE + Settings.GRID_SIZE // 2),
                     10
                 )
-            start_rect = (start_position[1] * Settings.GRID_SIZE, start_position[0] * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE)
-            end_rect = (end_position[1] * Settings.GRID_SIZE, end_position[0] * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE)
-            pygame.draw.rect(self.screen, Settings.RED, start_rect, 0, 50)
-            pygame.draw.rect(self.screen, Settings.RED, end_rect, 0, 50)
+        start_rect = (start_position[1] * Settings.GRID_SIZE, start_position[0] * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE)
+        end_rect = (end_position[1] * Settings.GRID_SIZE, end_position[0] * Settings.GRID_SIZE, Settings.GRID_SIZE, Settings.GRID_SIZE)
+        pygame.draw.rect(self.screen, Settings.GREEN, start_rect, 0, 50)
+        pygame.draw.rect(self.screen, Settings.GREEN, end_rect, 0, 50)
+
     def run(self):
         while True:
             self.clock.tick(Settings.FPS)
