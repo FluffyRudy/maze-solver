@@ -1,6 +1,6 @@
 # Maze solver
 
-This Python program generate random maze and solve it with minimum steps
+This Python program **generate random maze** and solve it with minimum steps
 
 ![Maze Solver](maze-solver.gif)
 
