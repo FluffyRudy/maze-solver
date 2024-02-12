@@ -75,6 +75,6 @@ def isValidPosition(maze, row, col):
     return 0 <= row < len(maze) and 0 <= col < len(maze[0]) and maze[row][col] == 1
 
 
-start_position = (0, 0)
+start_position = (15, 1)
 end_position   = (len(maze)-1, len(maze[0])-1)
 solution = bfsTraversal(maze, start_position, end_position)
