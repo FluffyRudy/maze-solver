@@ -1,6 +1,6 @@
 # Maze solver
 
-This Python program visualizes the Breadth-First Search (BFS) algorithm solving a maze using the Pygame library.
+This Python program generate random maze and solve it with minimum steps
 
 ![Maze Solver](maze-solver.gif)
 
@@ -28,7 +28,7 @@ The program uses a 2D grid to represent a maze, where 1s represent walls and 0s 
 To run the program, simply execute the script with a Python interpreter:
 
 ```bash
-python bfs_visualizer.py
+python main.py
 ```
 
 ## Requirements
