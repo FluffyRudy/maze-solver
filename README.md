@@ -1,4 +1,4 @@
-# BFS Maze Visualizer
+# Maze solver
 
 This Python program visualizes the Breadth-First Search (BFS) algorithm solving a maze using the Pygame library.
 
